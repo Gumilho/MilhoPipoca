@@ -5,10 +5,11 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.DEBUG
 )
+
 logger = logging.getLogger(__name__)
 
 def start(bot, update):
-    bot.sendMessage(update.message.chat_id, text='Hi!')
+    bot.sendMessage(update.message.chat_id, text='Welcome!')
     
 def help(bot, update):
     bot.sendMessage(update.message.chat_id, text='Help!')
