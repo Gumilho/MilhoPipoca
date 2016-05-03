@@ -1,12 +1,12 @@
+#from __future__ import unicode_literals
+#import os
+#from os.path import expanduser, join
+#from urllib.request import urlopen
+
+#import youtube_dl
+import telegram
 from telegram.ext import Updater, CommandHandler, MessageHandler,Filters
-import logging
-
-logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level=logging.DEBUG
-)
-
-logger = logging.getLogger(__name__)
+#from bs4 import BeautifulSoup
 
 def start(bot, update):
     bot.sendMessage(update.message.chat_id, text='Welcome!')
@@ -23,23 +23,22 @@ def change(bot, update):
         bot.sendMessage(update.message.chat_id, text='changed from %(old_channel) to %(new_channel) successfully!')
     f.close()
      
-def error(bot, update, error):
-    logger.warn('Update "%s" caused error "%s"' % (update, error))
-    
+   
 def main():
-    updater = Updater("168755507:AAHOZALQfHZ7qasSD1W6_Z_vCjqp8D4evbI")
-    last_command = bot.getUpdates()[-1]
-    updater.start_polling()
-    updater.idle()
+    bot = Updater("168755507:AAHOZALQfHZ7qasSD1W6_Z_vCjqp8D4evbI")
+    '''
     if last_command.message.text == '\start':
         bot.sendMessage(last_command.message.chat_id, text="Welcome! :)")
     else:
-        updates = [update for update in bot.getUpdates() if update.message.text != '/start' || update.message.text != '/change']
+        updates = [update for update in bot.getUpdates() if update.message.text != '/start' or update.message.text != '/change']
         for update in updates:
             message = update.message.text
             user_id = update.message.message_id
             chat_id = update.message.chat_id
-            
+    '''
+    dp = bot.dispatcher
+    dp.addHandler(CommandHandler("start", start))
+    dp.addHandler(CommandHandler("change", change))
     
 if __name__ == '__main__':
     main()
